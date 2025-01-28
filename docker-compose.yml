@@ -1,0 +1,39 @@
+version: '3.8'
+services:
+  help-parking-php:
+    build: .
+    # image: ghcr.io/programmerdatch/help-parking:latest
+    container_name: help-parking-container
+    ports:
+      - "7016:80"
+    networks:
+      - help-parking-network
+    depends_on:
+      - help-parking-db
+    environment:
+      - MYSQL_HOST=help-parking-db
+      - MYSQL_USER=programmerdatch
+      - MYSQL_PASSWORD=password
+      - MYSQL_DATABASE=parking_system
+
+  help-parking-db:
+    image: mysql:8.0
+    container_name: help-parking-mysql-container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: parking_system
+      MYSQL_USER: programmerdatch
+      MYSQL_PASSWORD: password
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - help-parking-network
+
+volumes:
+  db_data:
+
+networks:
+  help-parking-network:
+    driver: bridge
