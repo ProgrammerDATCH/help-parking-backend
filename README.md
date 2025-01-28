@@ -1,0 +1,1 @@
+docker build . -t ghcr.io/programmerdatch/help-parking:latest && docker push ghcr.io/programmerdatch/help-parking:latest

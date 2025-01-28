@@ -1,8 +1,8 @@
 version: '3.8'
 services:
   help-parking-php:
-    build: .
-    # image: ghcr.io/programmerdatch/help-parking:latest
+    # build: .
+    image: ghcr.io/programmerdatch/help-parking:latest
     container_name: help-parking-container
     ports:
       - "7016:80"
